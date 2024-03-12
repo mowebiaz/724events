@@ -93,7 +93,7 @@ const Page = () => {
 						}
 					>
 						{({ setIsOpened }) => <Form onSuccess={() => setIsOpened(true)} onError={() => null} />}
-					</Modal>
+ </Modal>
 				</div>
 			</main>
 			<footer className='row'>

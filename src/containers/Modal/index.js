@@ -24,14 +24,16 @@ const Modal = ({ opened, Content, children }) => {
       )}
     </>
   );
-};
+}; 
+
+
 
 Modal.defaultProps = {
   opened: false,
 }
 
 Modal.propTypes = {
-  opened: PropTypes.bool,
+   opened: PropTypes.bool, 
   Content: PropTypes.node.isRequired,
   children: PropTypes.func.isRequired,
 }
