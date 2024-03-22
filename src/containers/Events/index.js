@@ -14,14 +14,7 @@ const EventList = () => {
 	const [type, setType] = useState()
 	const [currentPage, setCurrentPage] = useState(1)
 
-	/* 	const filteredEvents = ((!type ? data?.events : data?.events) || []).filter((event, index) => {
-		if ((currentPage - 1) * PER_PAGE <= index && PER_PAGE * currentPage > index) {
-			return true
-		}
-		return false
-	}) */
-
-	/* revoir la liste vide */
+	// Filters events by type value. If type is undefined or null, displays all events.
 	const filteredEvents = (!type ? data?.events : data?.events.filter((event) => event.type === type)) || []
 
 	const changeType = (evtType) => {
@@ -29,8 +22,9 @@ const EventList = () => {
 		setType(evtType)
 	}
 
-	/* const pageNumber = Math.floor((filteredEvents?.length || 0) / PER_PAGE) + 1 */
+	// determines the number of pages and rounds up
 	const pageNumber = Math.ceil((filteredEvents?.length || 0) / PER_PAGE)
+	// events to display according to the current page
 	const eventsToShow = filteredEvents.slice((currentPage - 1) * PER_PAGE, currentPage * PER_PAGE)
 
 	const typeList = new Set(data?.events.map((event) => event.type))
