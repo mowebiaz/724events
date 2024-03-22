@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, act } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { api, DataProvider } from '../../contexts/DataContext'
 import Events from './index'
 
@@ -38,52 +38,33 @@ describe('When Events is created', () => {
 				<Events />
 			</DataProvider>
 		)
-		await screen.findAllByText('avril') 
+		await screen.findAllByText('avril')
 		// await screen.findByText('avril')
 	})
 	describe('and an error occured', () => {
 		it('an error message is displayed', async () => {
-			// api.loadData = jest.fn().mockRejectedValue()
-      // api.loadData = jest.fn().mockRejectedValue(new Error('An error occurred'))
-      api.loadData = jest.fn().mockRejectedValue("error")
+			// add a value to catch the error
+			api.loadData = jest.fn().mockRejectedValue(new Error('An error occurred'))
 
-
-    // Utiliser act pour envelopper le processus de rendu 
-     await act(async () => {
-      render(
-        <DataProvider>
-          <Events />
-        </DataProvider>
-      );
-    }); 
-
-/*  			render(
+			render(
 				<DataProvider>
 					<Events />
 				</DataProvider>
-			)  */
+			)
 
 			expect(await screen.findByText('An error occured')).toBeInTheDocument()
 		})
 	})
 	describe('and we select a category', () => {
-		/* Utilisation de it.only pour n'exécuter que ce test dans l'ensemble du fichier */
-		it.only('an filtered list is displayed', async () => {
+		// it.only was used to run only this test
+		it('an filtered list is displayed', async () => {
 			api.loadData = jest.fn().mockReturnValue(data)
 
-      await act(async () => {
-        render(
-          <DataProvider>
-            <Events />
-          </DataProvider>
-        );
-      }); 
-
-/* 			render(
+			render(
 				<DataProvider>
 					<Events />
 				</DataProvider>
-			) */
+			)
 
 			await screen.findByText('Forum #productCON')
 			fireEvent(
@@ -110,20 +91,11 @@ describe('When Events is created', () => {
 		it('the event detail is displayed', async () => {
 			api.loadData = jest.fn().mockReturnValue(data)
 
-      await act(async () => {
-        render(
-          <DataProvider>
-            <Events />
-          </DataProvider>
-        );
-      }); 
-
-
-/* 			render(
+			render(
 				<DataProvider>
 					<Events />
 				</DataProvider>
-			) */
+			)
 
 			fireEvent(
 				await screen.findByText('Conférence #productCON'),
