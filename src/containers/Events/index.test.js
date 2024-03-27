@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react'
+import { act } from 'react-dom/test-utils'
 import { api, DataProvider } from '../../contexts/DataContext'
 import Events from './index'
 
@@ -44,13 +45,15 @@ describe('When Events is created', () => {
 	describe('and an error occured', () => {
 		it('an error message is displayed', async () => {
 			// add a value to catch the error
-			api.loadData = jest.fn().mockRejectedValue(new Error('An error occurred'))
+			api.loadData = jest.fn().mockRejectedValue(new Error('An error occured'))
 
-			render(
-				<DataProvider>
-					<Events />
-				</DataProvider>
-			)
+ 			await act(async () => {
+				render(
+					<DataProvider>
+						<Events />
+					</DataProvider>
+				)
+			}) 
 
 			expect(await screen.findByText('An error occured')).toBeInTheDocument()
 		})
