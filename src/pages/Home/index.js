@@ -13,10 +13,7 @@ import Modal from '../../containers/Modal'
 import { useData } from '../../contexts/DataContext'
 
 const Page = () => {
-	/* const {last} = useData() */
-	const { data } = useData()
-	const sortedEvents = data?.events.sort((evtA, evtB) => new Date(evtB.date) - new Date(evtA.date))
-	const last = sortedEvents?.[0]
+	 const {last} = useData() 
 	return (
 		<>
 			<header>

@@ -7,28 +7,16 @@ import './style.scss'
 const Slider = () => {
 	const { data } = useData()
 	const [index, setIndex] = useState(0)
-	// faire une copie de la liste plutôt ?
 	const byDateDesc = data?.focus.sort((evtA, evtB) => new Date(evtA.date) - new Date(evtB.date))
-	/*   const byDateDesc = data?.focus.sort((evtA, evtB) =>
-  new Date(evtB.date) - new Date(evtA.date)
-); */
-
-	/* 	const nextCard = () => {
-		setTimeout(() => setIndex(index < byDateDesc.length - 1 ? index + 1 : 0), 5000)
-	}
-	useEffect(() => {
-		nextCard()
-	}) */
 
 	useEffect(() => {
-		// Création d'un intervalle pour passer à la carte suivante toutes les 5 secondes.
+		// Creation of an interval to move to the next card every 5 seconds.
 		const nextCard = setInterval(() => {
 			setIndex((prevIndex) => (prevIndex + 1) % byDateDesc.length)
 		}, 5000)
-
-		// Nettoyage de l'intervalle lors du démontage du composant pour éviter les fuites de mémoire.
+		// Clean the interval
 		return () => clearInterval(nextCard)
-	}, [byDateDesc]) // Dépendance à byDateDesc pour recalculer si la liste d'événements change.
+	}, [byDateDesc])
 
 	return (
 		<div className='SlideCardList'>
