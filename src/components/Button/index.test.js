@@ -34,4 +34,28 @@ describe("When a button is created", () => {
       expect(buttonElement.type).toEqual("submit");
     });
   });
+  // add unit tests to cover all situations
+  describe("and selected type is default", () => {
+    it("a default button is created", () => {
+      render(<Button type={BUTTON_TYPES.DEFAULT}>label</Button>);
+      const buttonElement = screen.getByTestId("button-test-id");
+      expect(buttonElement.type).toEqual("button");
+    });
+  });
+
+  describe("and no type is precised", () => {
+    it("a default button is created", () => {
+      render(<Button>label</Button>);
+      const buttonElement = screen.getByTestId("button-test-id");
+      expect(buttonElement.type).toEqual("button");
+    });
+  });
+
+  describe("and selected type is wrong", () => {
+    it("a default button is created", () => {
+      render(<Button type="wrong-type">label</Button>);
+      const buttonElement = screen.getByTestId("button-test-id");
+      expect(buttonElement.type).toEqual("button");
+    });
+  });
 });
