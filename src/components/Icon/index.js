@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 const Icon = ({ name }) => {
   let icon;
   switch (name) {
+    // modify data-testid
     case "twitch":
       icon = (
         <path
