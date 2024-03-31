@@ -25,7 +25,8 @@ export const DataProvider = ({ children }) => {
     try {
       const loadedData = await api.loadData();
       setData(loadedData);
-      const sortedEvents = loadedData?.events.sort((evtA, evtB) => new Date(evtB.date) - new Date(evtA.date))
+      // create a copy of the list so as not to modify the order of the original list
+      const sortedEvents = [...(loadedData?.events || [])].sort((evtA, evtB) => new Date(evtB.date) - new Date(evtA.date));
       setLast(sortedEvents[0]);
     } catch (err) {
       setError(err);
